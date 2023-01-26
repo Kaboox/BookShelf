@@ -46,22 +46,43 @@ public class Main {
     }
     public static void askCompleted(String title, String author, String genre) {
         boolean completion;
+        char char_choice;
         System.out.println("Pass in y/n, regarding if you have finished the book already");
-        String choice = scan.next();
-        char char_choice = choice.toLowerCase().charAt(0);
+        do {
+            String choice = scan.next();
+            char_choice = choice.toLowerCase().charAt(0);
+
+            if (char_choice != 'n' && char_choice != 'y')
+                System.out.println("Wrong input,try again (y/n)");
+        } while (char_choice != 'n' && char_choice != 'y');
+
         if (char_choice == 'n') {
             completion = false;
-            //books[0] = new Book(title, author, genre, completion);
             booklist.add(new Book(title, author, genre, completion));
         } else if (char_choice == 'y') {
             completion = true;
             askRating(title, author, genre, completion);
         }
     }
+    // TODO - check if input is int, also apply range 0-10
     public static void askRating(String title, String author, String genre, boolean completion) {
+        int rating = -1;
         System.out.println("What do you rate the book? 0-10");
-        int rating = scan.nextInt();
+
+        do {
+            try {
+                String possible_rating = scan.next();
+                if (Integer.parseInt(possible_rating) >= 0 && Integer.parseInt(possible_rating) <= 10)
+                    rating = Integer.parseInt(possible_rating);
+                else
+                    System.out.println("Given input is not in range 0-10");
+            } catch(NumberFormatException e) {
+            System.out.println("Input is not an integer");
+        }
+        } while (rating < 0 || rating > 10);
+
         booklist.add(new Book(title, author, genre, completion, rating));
+
     }
     public static void displayArray(ArrayList<Book> booklist) {
         System.out.print("[ ");
@@ -79,9 +100,10 @@ public class Main {
     }
     // asks user to choose object to modify later with changeProperties method
     public static void chooseObject() {
-        System.out.println("Which object would you like to modify? (0-4)");
+        System.out.println("Which object would you like to modify?");
         displayArray(booklist);
         System.out.println(" ");
+
         int chosenIndex = scan.nextInt();
         changeProperties(chosenIndex);
     }
@@ -93,8 +115,11 @@ public class Main {
         System.out.println("G - genre");
         System.out.println("C - completion");
         System.out.println("R - rating");
-        String strChoice = scan.next();
-        char choice = strChoice.toLowerCase().charAt(0);
+        char choice;
+        do {
+            String strChoice = scan.next();
+            choice = strChoice.toLowerCase().charAt(0);
+        } while (choice != 't' && choice != 'a' && choice != 'g' && choice != 'c' && choice != 'r');
         if (choice == 't') {
             System.out.println("Put in the new title");
             String title = scan.next();
@@ -178,5 +203,4 @@ public class Main {
         } while (choice != 'q');
 
     }
-    // CHANGE EVERYTHING TO WORK WITH ARRAY LIST
 }
