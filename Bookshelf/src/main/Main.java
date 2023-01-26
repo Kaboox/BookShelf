@@ -103,7 +103,7 @@ public class Main {
         displayArray(booklist);
         System.out.println(" ");
 
-        int chosenIndex = scan.nextInt();
+        int chosenIndex = validationArraySize();
         changeProperties(chosenIndex);
     }
     // changes chosen properties of the book
@@ -146,37 +146,40 @@ public class Main {
         }
     }
     // displays all properties of the given object
-    // TODO - make sure the input is correct ( is integer and in correct range)
     public static void allInfo() {
-        int index = 100;
-        String index_to_check;
-        System.out.println("Choose the item you wanna display");
-            do {
-                try {
-                    try {
-                        index_to_check = scan.next();
-                        if (Integer.parseInt(index_to_check) >= 0 && Integer.parseInt(index_to_check) < booklist.size()) {
-                            index = Integer.parseInt(index_to_check);
-                        } else
-                            System.out.println("Index is out of range");
-                    } catch (NumberFormatException e) {
-                        System.out.println("Input is not an integer");
-                    }
-                    ;
-                } catch(IndexOutOfBoundsException a) {
-                    System.out.println("Index out of range");
-                }
-            } while (index < 0 || index > booklist.size());
+        int index = validationArraySize();
         System.out.println(booklist.get(index));
     }
-    // deleted book from the shelf
+    // deletes book from the shelf
     public static void deleteBook() {
         System.out.println("Which item would you like to delete?");
-        int index = scan.nextInt();
+        int index = validationArraySize();
         booklist.remove(index);
     }
     public static void quit() {
         scan.close();
+    }
+    public static int validationArraySize() {
+        int index = 100;
+        String index_to_check;
+        System.out.println("Choose the item");
+        do {
+            //try {
+            try {
+                index_to_check = scan.next();
+                if (Integer.parseInt(index_to_check) >= 0 && Integer.parseInt(index_to_check) < booklist.size()) {
+                    index = Integer.parseInt(index_to_check);
+                } else
+                    System.out.println("Index is out of range");
+            } catch (NumberFormatException e) {
+                System.out.println("Input is not an integer");
+            }
+            ;
+            // } catch(IndexOutOfBoundsException a) {
+            //System.out.println("Index out of range");
+            //}
+        } while (index < 0 || index > booklist.size());
+        return index;
     }
 
 
@@ -217,6 +220,7 @@ public class Main {
                 //break;
             }
         } while (choice != 'q');
+
 
     }
 }
