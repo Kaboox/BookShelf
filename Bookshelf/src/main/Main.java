@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 // Bookshelf contains shelf with books, you can adjust it to your liking
 
 public class Main {
-   // static Book[] books = new Book[5];
     static ArrayList<Book> booklist = new ArrayList();
     static Scanner scan = new Scanner(System.in);
     static public String start() {
@@ -64,7 +63,7 @@ public class Main {
             askRating(title, author, genre, completion);
         }
     }
-    // TODO - check if input is int, also apply range 0-10
+
     public static void askRating(String title, String author, String genre, boolean completion) {
         int rating = -1;
         System.out.println("What do you rate the book? 0-10");
@@ -147,10 +146,27 @@ public class Main {
         }
     }
     // displays all properties of the given object
+    // TODO - make sure the input is correct ( is integer and in correct range)
     public static void allInfo() {
+        int index = 100;
+        String index_to_check;
         System.out.println("Choose the item you wanna display");
-        //displayArray(books);
-        int index = scan.nextInt();
+            do {
+                try {
+                    try {
+                        index_to_check = scan.next();
+                        if (Integer.parseInt(index_to_check) >= 0 && Integer.parseInt(index_to_check) < booklist.size()) {
+                            index = Integer.parseInt(index_to_check);
+                        } else
+                            System.out.println("Index is out of range");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Input is not an integer");
+                    }
+                    ;
+                } catch(IndexOutOfBoundsException a) {
+                    System.out.println("Index out of range");
+                }
+            } while (index < 0 || index > booklist.size());
         System.out.println(booklist.get(index));
     }
     // deleted book from the shelf
