@@ -141,7 +141,18 @@ public class Main {
             }
         } else if (choice == 'r') {
             System.out.println("Put in the new rating");
-            int rating = scan.nextInt();
+            int rating = -1;
+            do {
+                try {
+                    String possible_rating = scan.next();
+                    if (Integer.parseInt(possible_rating) >= 0 && Integer.parseInt(possible_rating) <= 10)
+                        rating = Integer.parseInt(possible_rating);
+                    else
+                        System.out.println("Given input is not in range 0-10");
+                } catch(NumberFormatException e) {
+                    System.out.println("Input is not an integer");
+                }
+            } while (rating < 0 || rating > 10);
             booklist.get(index).setRating(rating);
         }
     }
