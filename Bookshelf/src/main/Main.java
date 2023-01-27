@@ -8,12 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // Bookshelf contains shelf with books, you can adjust it to your liking
+// try opening scanner every method for all lined inputs
 
 public class Main {
     static ArrayList<Book> booklist = new ArrayList();
-    static Scanner scan = new Scanner(System.in);
+    //static Scanner scan = new Scanner(System.in);
     static public String start() {
         String choice;
+        Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to your Bookshelf, what would you like to do?");
         System.out.println("A - add new object to your shelf");
         System.out.println("S - display all present items");
@@ -25,27 +27,29 @@ public class Main {
         return choice;
     }
     // methods to get user's input values for creating new item
-    public static void askTitle(){
+    public static String askTitle(){
+            Scanner scan = new Scanner(System.in);
             System.out.println("Pass in the book's title");
-            String title = "";
-            title+=scan.next();
-            //System.out.print(title);
-            askAuthor(title);
+            String title = scan.nextLine();
+            return title;
 
     }
-    public static void askAuthor(String title) {
+    public static String askAuthor() {
+        Scanner scan = new Scanner(System.in);
         System.out.println("Pass in the book's author");
-        String author = scan.next();
-        askGenre(title, author);
+        String author = scan.nextLine();
+        return author;
     }
-    public static void askGenre(String title, String author) {
+    public static String askGenre() {
+        Scanner scan = new Scanner(System.in);
         System.out.println("Pass in the book's genre");
-        String genre = scan.next();
-        askCompleted(title, author, genre);
+        String genre = scan.nextLine();
+        return genre;
 
     }
-    public static void askCompleted(String title, String author, String genre) {
-        boolean completion;
+    public static boolean askCompleted() {
+        Scanner scan = new Scanner(System.in);
+        boolean completion = false;
         char char_choice;
         System.out.println("Pass in y/n, regarding if you have finished the book already");
         do {
@@ -58,14 +62,16 @@ public class Main {
 
         if (char_choice == 'n') {
             completion = false;
-            booklist.add(new Book(title, author, genre, completion));
+            //booklist.add(new Book(title, author, genre, completion));
         } else if (char_choice == 'y') {
             completion = true;
-            askRating(title, author, genre, completion);
+            //askRating(title, author, genre, completion);
         }
+        return completion;
     }
 
-    public static void askRating(String title, String author, String genre, boolean completion) {
+    public static int askRating() {
+        Scanner scan = new Scanner(System.in);
         int rating = -1;
         System.out.println("What do you rate the book? 0-10");
 
@@ -81,8 +87,21 @@ public class Main {
         }
         } while (rating < 0 || rating > 10);
 
-        booklist.add(new Book(title, author, genre, completion, rating));
-
+        //booklist.add(new Book(title, author, genre, completion, rating));
+        return rating;
+    }
+    public static void addBook() {
+        String title = askTitle();
+        String author = askAuthor();
+        String genre = askGenre();
+        boolean completion = askCompleted();
+        int rating;
+        if (completion == true) {
+            rating = askRating();
+            booklist.add(new Book(title, author, genre, completion, rating));
+        } else {
+            booklist.add(new Book(title, author, genre, completion));
+        }
     }
     public static void displayArray(ArrayList<Book> booklist) {
         System.out.print("[ ");
@@ -109,6 +128,7 @@ public class Main {
     }
     // changes chosen properties of the book
     public static void changeProperties(int index) {
+        Scanner scan = new Scanner(System.in);
         System.out.println("What property would you like to change? ");
         System.out.println("T - title");
         System.out.println("A - author");
@@ -169,6 +189,7 @@ public class Main {
         booklist.remove(index);
     }
     public static int validationArraySize() {
+        Scanner scan = new Scanner(System.in);
         int index = 100;
         String index_to_check;
         System.out.println("Choose the item");
@@ -188,12 +209,12 @@ public class Main {
 
 
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
         char choice;
         booklist.add(new Book("Tadeusz 12", "Zbigniew","Dramat",true,6));
         booklist.add(new Book("Ogniem i Mieczem", "Zbigniew","Dramat",true,6));
 
-        String siema = scan.nextLine();
-        System.out.println(siema);
+
 
         boolean valid_option = false;
         do {
@@ -207,7 +228,7 @@ public class Main {
             } while (valid_option != true);
 
             if (choice == 'a') {
-                askTitle();
+                addBook();
                 displayArray(booklist);
 
             } else if (choice == 's') {
