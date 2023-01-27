@@ -27,7 +27,8 @@ public class Main {
     // methods to get user's input values for creating new item
     public static void askTitle(){
             System.out.println("Pass in the book's title");
-            String title = scan.next();
+            String title = "";
+            title+=scan.next();
             //System.out.print(title);
             askAuthor(title);
 
@@ -167,15 +168,11 @@ public class Main {
         int index = validationArraySize();
         booklist.remove(index);
     }
-    public static void quit() {
-        scan.close();
-    }
     public static int validationArraySize() {
         int index = 100;
         String index_to_check;
         System.out.println("Choose the item");
         do {
-            //try {
             try {
                 index_to_check = scan.next();
                 if (Integer.parseInt(index_to_check) >= 0 && Integer.parseInt(index_to_check) < booklist.size()) {
@@ -185,10 +182,6 @@ public class Main {
             } catch (NumberFormatException e) {
                 System.out.println("Input is not an integer");
             }
-            ;
-            // } catch(IndexOutOfBoundsException a) {
-            //System.out.println("Index out of range");
-            //}
         } while (index < 0 || index > booklist.size());
         return index;
     }
@@ -196,8 +189,11 @@ public class Main {
 
     public static void main(String[] args) {
         char choice;
-        booklist.add(new Book("Tadeusz12", "Zbigniew","Dramat",true,6));
-        booklist.add(new Book("Tadeusz1251", "Zbigniew","Dramat",true,6));
+        booklist.add(new Book("Tadeusz 12", "Zbigniew","Dramat",true,6));
+        booklist.add(new Book("Ogniem i Mieczem", "Zbigniew","Dramat",true,6));
+
+        String siema = scan.nextLine();
+        System.out.println(siema);
 
         boolean valid_option = false;
         do {
@@ -226,12 +222,11 @@ public class Main {
                 displayArray(booklist);
                 deleteBook();
                 displayArray(booklist);
-            } else if (choice == 'q') {
-                quit();
-                //break;
             }
         } while (choice != 'q');
 
 
+
+        scan.close();
     }
 }
