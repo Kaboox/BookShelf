@@ -1,5 +1,6 @@
 package Book;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -67,3 +68,4 @@ public class Book {
         return "Title: " + getTitle() + ", author: " + getAuthor() + ", genre: " + getGenre() + ", completion status: " + getCompleted() + ", rating: " + getRating();
     }
 }
+
