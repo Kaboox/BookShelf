@@ -7,4 +7,21 @@ public class Book {
     int release_year;
 
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public int getRelease_year() {
+        return release_year;
+    }
+
+
 }
