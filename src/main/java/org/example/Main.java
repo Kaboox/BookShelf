@@ -9,7 +9,7 @@ public class Main {
         boolean working = true;
         System.out.println("Hello and welcome to your private BookShelf. What would you like to do?");
         while(working) {
-            Bookshelf.viewOptions();
+            working = Bookshelf.viewOptions();
         }
 
     }
