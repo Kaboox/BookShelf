@@ -1,10 +1,10 @@
 package org.example;
 
 public class Book {
-    String title;
-    String author;
-    String genre;
-    int release_year;
+    private String title;
+    private String author;
+    private String genre;
+    private int release_year;
 
 
     public Book() {

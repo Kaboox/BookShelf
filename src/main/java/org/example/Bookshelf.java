@@ -22,6 +22,8 @@ public class Bookshelf {
             addBook();
         } else if (choice.equals("V")) {
             displayBooks();
+        } else if(choice.equals("D")) {
+            deleteBook();
         }
 
         return true;
@@ -45,5 +47,14 @@ public class Bookshelf {
         for (Book book: books) {
             System.out.println(book.getTitle());
         }
+    }
+
+    public static void deleteBook() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Which book would you like to delete? ");
+        displayBooks();
+        System.out.println("Pass the number in the list (starting from 1): ");
+        int indexToDelete = scan.nextInt();
+        books.remove(indexToDelete);
     }
 }
