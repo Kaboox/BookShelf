@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bookshelf {
-    private ArrayList<Book> books  = new ArrayList<Book>();
+    private static ArrayList<Book> books  = new ArrayList<Book>();
 
     public static  boolean viewOptions() {
         Scanner scan = new Scanner(System.in);
@@ -16,13 +16,18 @@ public class Bookshelf {
         String choice = scan.nextLine().toUpperCase();
 
         if(choice.equals("Q")) {
-
             return false;
         }
+        if(choice.equals("A")) {
+            addBook();
+        } else if (choice.equals("V")) {
+            displayBooks();
+        }
+
         return true;
     }
 
-    public void addBook() {
+    public static void addBook() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Pass in the book's title: ");
         String title = scan.nextLine();
@@ -34,5 +39,11 @@ public class Bookshelf {
         int release_year = scan.nextInt();
 
         books.add(new Book(title, author, genre, release_year));
+    }
+
+    public static void displayBooks() {
+        for (Book book: books) {
+            System.out.println(book.getTitle());
+        }
     }
 }
