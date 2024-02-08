@@ -57,4 +57,8 @@ public class Bookshelf {
         int indexToDelete = scan.nextInt();
         books.remove(indexToDelete);
     }
+
+    public static void viewDetails() {
+        System.out.println("Select the book, you wanna see: ");
+    }
 }
