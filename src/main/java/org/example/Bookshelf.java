@@ -44,8 +44,12 @@ public class Bookshelf {
     }
 
     public static void displayBooks() {
-        for (Book book: books) {
-            System.out.println(book.getTitle());
+        if(books.size() == 0) {
+            System.out.println("Bookshelf is empty, add something first");
+        } else {
+            for (Book book: books) {
+                System.out.println(book.getTitle());
+            }
         }
     }
 
@@ -59,6 +63,10 @@ public class Bookshelf {
     }
 
     public static void viewDetails() {
-        System.out.println("Select the book, you wanna see: ");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Select the number of the book, you wanna see: ");
+        displayBooks();
+        int index_of_choice = scan.nextInt();
+
     }
 }
