@@ -24,6 +24,8 @@ public class Bookshelf {
             displayBooks();
         } else if(choice.equals("D")) {
             deleteBook();
+        } else if(choice.equals("M")) {
+            viewDetails();
         }
 
         return true;
@@ -67,6 +69,6 @@ public class Bookshelf {
         System.out.println("Select the number of the book, you wanna see: ");
         displayBooks();
         int index_of_choice = scan.nextInt();
-
+        System.out.println(books.get(index_of_choice));
     }
 }
