@@ -8,12 +8,15 @@ public class Bookshelf {
 
     public static  boolean viewOptions() {
         Scanner scan = new Scanner(System.in);
+        String choice = "";
         System.out.println("A - add new book");
         System.out.println("V - view all books");
         System.out.println("D - delete selected book");
         System.out.println("M - view more details about a book");
         System.out.println("Q - close");
-        String choice = scan.nextLine().toUpperCase();
+
+        choice = scan.nextLine().toUpperCase();
+
 
         if(choice.equals("Q")) {
             return false;
