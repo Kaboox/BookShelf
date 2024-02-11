@@ -48,6 +48,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return getTitle() + " " + getAuthor() + " " + getGenre() + " " + getRelease_year();
+        return "Title: " + getTitle() + " Author: " + getAuthor() + " Genre: " + getGenre() + " Year: " + getRelease_year();
     }
 }
