@@ -60,18 +60,26 @@ public class Bookshelf {
 
     public static void deleteBook() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Which book would you like to delete? ");
-        displayBooks();
-        System.out.println("Pass the number in the list (starting from 1): ");
-        int indexToDelete = scan.nextInt();
-        books.remove(indexToDelete);
+        if (books.size() == 0) {
+            System.out.println("Bookshelf is empty, add something first");
+        } else {
+            System.out.println("Which book would you like to delete? ");
+            displayBooks();
+            System.out.println("Pass the number in the list (starting from 1): ");
+            int indexToDelete = scan.nextInt();
+            books.remove(indexToDelete);
+        }
     }
 
     public static void viewDetails() {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Select the number of the book, you wanna see: ");
-        displayBooks();
-        int index_of_choice = scan.nextInt();
-        System.out.println(books.get(index_of_choice));
+        if(books.size() == 0) {
+            System.out.println("Bookshelf is empty, add something first");
+        } else {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Select the number of the book, you wanna see: ");
+            displayBooks();
+            int index_of_choice = scan.nextInt();
+            System.out.println(books.get(index_of_choice));
+        }
     }
 }
