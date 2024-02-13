@@ -45,6 +45,21 @@ public class Book {
         return release_year;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setRelease_year(int release_year) {
+        this.release_year = release_year;
+    }
 
     @Override
     public String toString() {

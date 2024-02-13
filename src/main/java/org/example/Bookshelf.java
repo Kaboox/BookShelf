@@ -13,6 +13,7 @@ public class Bookshelf {
         System.out.println("V - view all books");
         System.out.println("D - delete selected book");
         System.out.println("M - view more details about a book");
+        System.out.println("F - modify chosen book's properties");
         System.out.println("Q - close");
 
         choice = scan.nextLine().toUpperCase();
@@ -29,6 +30,8 @@ public class Bookshelf {
             deleteBook();
         } else if(choice.equals("M")) {
             viewDetails();
+        } else if(choice.equals("F")) {
+            modifyProperties();
         }
 
         return true;
@@ -81,5 +84,46 @@ public class Bookshelf {
             int index_of_choice = scan.nextInt();
             System.out.println(books.get(index_of_choice));
         }
+    }
+
+    public static void modifyProperties() {
+        if(books.size() == 0) {
+            System.out.println("Bookshelf is empty, add something first");
+        } else {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Select the number of the book, you wanna modify: ");
+            displayBooks();
+            int index_of_choice = Integer.parseInt(scan.nextLine());
+            System.out.println("What property would you like to change?: ");
+            System.out.println("T - title");
+            System.out.println("A - author");
+            System.out.println("G - genre");
+            System.out.println("Y - year");
+            String property_to_change = scan.nextLine().toUpperCase();
+            switch (property_to_change) {
+                case "T" -> {
+                    System.out.println("Pass the new title: ");
+                    String new_title = scan.nextLine();
+                    books.get(index_of_choice).setTitle(new_title);
+                }
+                case "A" -> {
+                    System.out.println("Pass the new author: ");
+                    String new_author = scan.nextLine();
+                    books.get(index_of_choice).setAuthor(new_author);
+                }
+                case "G" -> {
+                    System.out.println("Pass the new genre: ");
+                    String new_genre = scan.nextLine();
+                    books.get(index_of_choice).setGenre(new_genre);
+                }
+                case "Y" -> {
+                    System.out.println("Pass the new release year: ");
+                    int new_year = scan.nextInt();
+                    books.get(index_of_choice).setRelease_year(new_year);
+                }
+            }
+
+        }
+
     }
 }
