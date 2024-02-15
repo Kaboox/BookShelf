@@ -1,6 +1,8 @@
 package org.example;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Bookshelf {
@@ -38,15 +40,38 @@ public class Bookshelf {
     }
 
     public static void addBook() {
+        String title;
+        String author;
+        String genre;
+        int release_year;
         Scanner scan = new Scanner(System.in);
         System.out.println("Pass in the book's title: ");
-        String title = scan.nextLine();
+        do {
+            title = scan.nextLine().trim();
+        } while (title.length() == 0);
         System.out.println("Pass in the book's author: ");
-        String author = scan.nextLine();
+        do {
+            author = scan.nextLine().trim();
+        } while (author.length() == 0);
         System.out.println("Pass in the book's genre: ");
-        String genre = scan.nextLine();
-        System.out.println("Pass in the books's release year: ");
-        int release_year = scan.nextInt();
+        do {
+            genre = scan.nextLine().trim();
+        } while(genre.length() == 0);
+        System.out.println("Pass in the book's release year: ");
+        do {
+            try {
+                release_year = scan.nextInt();
+                scan.nextLine(); // Consume the newline character
+                if (release_year <= 0 || release_year > Year.now().getValue()) {
+                    System.out.println("Invalid year. Please enter a valid year.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid year.");
+                scan.nextLine(); // Consume the invalid input
+                release_year = 0;
+            }
+        } while (release_year <= 0 || release_year > Year.now().getValue());
+
 
         books.add(new Book(title, author, genre, release_year));
     }
