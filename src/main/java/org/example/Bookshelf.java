@@ -124,13 +124,27 @@ public class Bookshelf {
     }
 
     public static void modifyProperties() {
+        int index_of_choice;
         if(books.isEmpty()) {
             System.out.println("Bookshelf is empty, add something first");
         } else {
             Scanner scan = new Scanner(System.in);
             System.out.println("Select the number of the book, you wanna modify: ");
+            while(true) {
+                try {
+                    displayBooks();
+                    index_of_choice = Integer.parseInt(scan.nextLine());
+                    if(index_of_choice >= 1 && index_of_choice <= books.size()) {
+                        break;
+                    } else {
+                        System.out.println("Wrong index");
+                    }
+                } catch(NumberFormatException e) {
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            System.out.println("Select the number of the book, you wanna modify: ");
             displayBooks();
-            int index_of_choice = Integer.parseInt(scan.nextLine());
             System.out.println("What property would you like to change?: ");
             System.out.println("T - title");
             System.out.println("A - author");
@@ -141,22 +155,22 @@ public class Bookshelf {
                 case "T" -> {
                     System.out.println("Pass the new title: ");
                     String new_title = scan.nextLine();
-                    books.get(index_of_choice).setTitle(new_title);
+                    books.get(index_of_choice-1).setTitle(new_title);
                 }
                 case "A" -> {
                     System.out.println("Pass the new author: ");
                     String new_author = scan.nextLine();
-                    books.get(index_of_choice).setAuthor(new_author);
+                    books.get(index_of_choice-1).setAuthor(new_author);
                 }
                 case "G" -> {
                     System.out.println("Pass the new genre: ");
                     String new_genre = scan.nextLine();
-                    books.get(index_of_choice).setGenre(new_genre);
+                    books.get(index_of_choice-1).setGenre(new_genre);
                 }
                 case "Y" -> {
                     System.out.println("Pass the new release year: ");
                     int new_year = scan.nextInt();
-                    books.get(index_of_choice).setRelease_year(new_year);
+                    books.get(index_of_choice-1).setRelease_year(new_year);
                 }
             }
 
