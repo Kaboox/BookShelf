@@ -94,8 +94,20 @@ public class Bookshelf {
             System.out.println("Which book would you like to delete? ");
             displayBooks();
             System.out.println("Pass the number in the list (starting from 1): ");
-            int indexToDelete = scan.nextInt();
-            books.remove(indexToDelete);
+            int indexToDelete;
+            while(true) {
+                try {
+                    indexToDelete = Integer.parseInt(scan.nextLine());
+                    if(indexToDelete >= 1 && indexToDelete <= books.size()) {
+                        break; // valid input
+                    } else {
+                        System.out.println("Please choose index that exists in the list");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter a valid number.");
+                }
+            }
+            books.remove(indexToDelete-1);
         }
     }
 
