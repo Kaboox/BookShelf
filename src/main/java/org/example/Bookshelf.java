@@ -48,15 +48,15 @@ public class Bookshelf {
         System.out.println("Pass in the book's title: ");
         do {
             title = scan.nextLine().trim();
-        } while (title.length() == 0);
+        } while (title.isEmpty());
         System.out.println("Pass in the book's author: ");
         do {
             author = scan.nextLine().trim();
-        } while (author.length() == 0);
+        } while (author.isEmpty());
         System.out.println("Pass in the book's genre: ");
         do {
             genre = scan.nextLine().trim();
-        } while(genre.length() == 0);
+        } while(genre.isEmpty());
         System.out.println("Pass in the book's release year: ");
         do {
             try {
@@ -77,7 +77,7 @@ public class Bookshelf {
     }
 
     public static void displayBooks() {
-        if(books.size() == 0) {
+        if(books.isEmpty()) {
             System.out.println("Bookshelf is empty, add something first");
         } else {
             for (Book book: books) {
@@ -88,7 +88,7 @@ public class Bookshelf {
 
     public static void deleteBook() {
         Scanner scan = new Scanner(System.in);
-        if (books.size() == 0) {
+        if (books.isEmpty()) {
             System.out.println("Bookshelf is empty, add something first");
         } else {
             System.out.println("Which book would you like to delete? ");
@@ -100,7 +100,7 @@ public class Bookshelf {
     }
 
     public static void viewDetails() {
-        if(books.size() == 0) {
+        if(books.isEmpty()) {
             System.out.println("Bookshelf is empty, add something first");
         } else {
             Scanner scan = new Scanner(System.in);
@@ -112,7 +112,7 @@ public class Bookshelf {
     }
 
     public static void modifyProperties() {
-        if(books.size() == 0) {
+        if(books.isEmpty()) {
             System.out.println("Bookshelf is empty, add something first");
         } else {
             Scanner scan = new Scanner(System.in);
