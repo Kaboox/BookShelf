@@ -119,7 +119,7 @@ public class Bookshelf {
             System.out.println("Select the number of the book, you wanna see: ");
             displayBooks();
             int index_of_choice = scan.nextInt();
-            System.out.println(books.get(index_of_choice));
+            System.out.println(books.get(index_of_choice-1));
         }
     }
 
@@ -143,14 +143,21 @@ public class Bookshelf {
                     System.out.println("Please enter a valid number");
                 }
             }
-            System.out.println("Select the number of the book, you wanna modify: ");
-            displayBooks();
             System.out.println("What property would you like to change?: ");
             System.out.println("T - title");
             System.out.println("A - author");
             System.out.println("G - genre");
             System.out.println("Y - year");
-            String property_to_change = scan.nextLine().toUpperCase();
+            String property_to_change;
+            while(true) {
+                property_to_change = scan.nextLine().toUpperCase();
+                if(!property_to_change.equals("T") && !property_to_change.equals("A") &&
+                        !property_to_change.equals("G") && !property_to_change.equals("Y")) {
+                    System.out.println("Select between T/A/G/Y");
+                } else {
+                    break;
+                }
+            }
             switch (property_to_change) {
                 case "T" -> {
                     System.out.println("Pass the new title: ");
