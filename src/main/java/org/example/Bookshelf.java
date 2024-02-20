@@ -94,19 +94,7 @@ public class Bookshelf {
             System.out.println("Which book would you like to delete? ");
             displayBooks();
             System.out.println("Pass the number in the list (starting from 1): ");
-            int indexToDelete;
-            while(true) {
-                try {
-                    indexToDelete = Integer.parseInt(scan.nextLine());
-                    if(indexToDelete >= 1 && indexToDelete <= books.size()) {
-                        break; // valid input
-                    } else {
-                        System.out.println("Please choose index that exists in the list");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Please enter a valid number.");
-                }
-            }
+            int indexToDelete = getValidIndex();
             books.remove(indexToDelete-1);
         }
     }
@@ -118,31 +106,20 @@ public class Bookshelf {
             Scanner scan = new Scanner(System.in);
             System.out.println("Select the number of the book, you wanna see: ");
             displayBooks();
-            int index_of_choice = scan.nextInt();
+            int index_of_choice = getValidIndex();
             System.out.println(books.get(index_of_choice-1));
         }
     }
 
     public static void modifyProperties() {
+        Scanner scan = new Scanner(System.in);
         int index_of_choice;
         if(books.isEmpty()) {
             System.out.println("Bookshelf is empty, add something first");
         } else {
-            Scanner scan = new Scanner(System.in);
             System.out.println("Select the number of the book, you wanna modify: ");
-            while(true) {
-                try {
-                    displayBooks();
-                    index_of_choice = Integer.parseInt(scan.nextLine());
-                    if(index_of_choice >= 1 && index_of_choice <= books.size()) {
-                        break;
-                    } else {
-                        System.out.println("Wrong index");
-                    }
-                } catch(NumberFormatException e) {
-                    System.out.println("Please enter a valid number");
-                }
-            }
+            displayBooks();
+            index_of_choice = getValidIndex();
             System.out.println("What property would you like to change?: ");
             System.out.println("T - title");
             System.out.println("A - author");
@@ -183,5 +160,23 @@ public class Bookshelf {
 
         }
 
+    }
+
+    public static int getValidIndex() {
+        Scanner scan = new Scanner(System.in);
+        int indexToDelete;
+        while(true) {
+            try {
+                indexToDelete = Integer.parseInt(scan.nextLine());
+                if(indexToDelete >= 1 && indexToDelete <= books.size()) {
+                    break; // valid input
+                } else {
+                    System.out.println("Please choose index that exists in the list");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
+        return indexToDelete;
     }
 }
