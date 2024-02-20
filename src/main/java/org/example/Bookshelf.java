@@ -43,7 +43,6 @@ public class Bookshelf {
         String title;
         String author;
         String genre;
-        int release_year;
         Scanner scan = new Scanner(System.in);
         System.out.println("Pass in the book's title: ");
         do {
@@ -58,21 +57,7 @@ public class Bookshelf {
             genre = scan.nextLine().trim();
         } while(genre.isEmpty());
         System.out.println("Pass in the book's release year: ");
-        do {
-            try {
-                release_year = scan.nextInt();
-                scan.nextLine(); // Consume the newline character
-                if (release_year <= 0 || release_year > Year.now().getValue()) {
-                    System.out.println("Invalid year. Please enter a valid year.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid year.");
-                scan.nextLine(); // Consume the invalid input
-                release_year = 0;
-            }
-        } while (release_year <= 0 || release_year > Year.now().getValue());
-
-
+        int release_year = getValidYear();
         books.add(new Book(title, author, genre, release_year));
     }
 
@@ -153,7 +138,7 @@ public class Bookshelf {
                 }
                 case "Y" -> {
                     System.out.println("Pass the new release year: ");
-                    int new_year = scan.nextInt();
+                    int new_year = getValidYear();
                     books.get(index_of_choice-1).setRelease_year(new_year);
                 }
             }
@@ -178,5 +163,24 @@ public class Bookshelf {
             }
         }
         return indexToDelete;
+    }
+
+    public static int getValidYear() {
+        int release_year;
+        Scanner scan = new Scanner(System.in);
+        do {
+            try {
+                release_year = scan.nextInt();
+                scan.nextLine(); // Consume the newline character
+                if (release_year <= 0 || release_year > Year.now().getValue()) {
+                    System.out.println("Invalid year. Please enter a valid year.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid year.");
+                scan.nextLine(); // Consume the invalid input
+                release_year = 0;
+            }
+        } while (release_year <= 0 || release_year > Year.now().getValue());
+        return release_year;
     }
 }
